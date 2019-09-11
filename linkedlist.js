@@ -104,17 +104,46 @@ class LinkedList {
   }
 
 
-
-
-  // just prints out the data in list
+  // Print out the data in list
   printListData() {
+    let myList = '[HEAD] --> '
     let current = this.head;
-
     while (current) {
-      console.log(current.data);
+      myList += current.data.toString()
+      if(current.next) {
+        myList += (' --> ')
+      } else {
+        myList += (' |')
+      }
       current = current.next;
     }
-  }
+    console.log(myList)
+  }  
+
+
+  // Reverse the linked list
+  reverseList() {
+    let myList = '[HEAD] --> '
+
+    let prevNode, nextNode
+    nextNode = this.head
+
+    let allNodes = []
+
+    while (nextNode) {
+      allNodes.push(nextNode)
+      nextNode = nextNode.next
+    }
+
+    let lastIndex = allNodes.length - 1
+    allNodes[0].next = null
+    for(let i = lastIndex; i > 0; i--) {
+      nextNode = allNodes[i]
+      prevNode = allNodes[i-1]
+      nextNode.next = prevNode
+    }
+    this.head = allNodes[lastIndex]
+  }    
 }
 
 
